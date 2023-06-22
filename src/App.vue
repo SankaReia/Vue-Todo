@@ -1,30 +1,47 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>
+    <TodoForm @add="addTodo"/>
+    <TodoList 
+      :todos="todos" 
+      @remove="removeTodo"
+    />
+  </div>
 </template>
 
+<script>
+import TodoList from "@/components/TodoList";
+import TodoForm from "@/components/TodoForm";
+
+export default {
+  components: {
+    TodoList,
+    TodoForm,
+  },
+
+  data() {
+    return {
+      todos: [
+        { id: 1, task: "task1", checked: false },
+        { id: 2, task: "task2", checked: false },
+      ],
+    };
+  },
+
+  methods: {
+    addTodo(todo) {
+      this.todos.push(todo)
+    },
+    removeTodo(todo){
+      this.todos = this.todos.filter(t => t.id !== todo.id)
+    },
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 </style>
