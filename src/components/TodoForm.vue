@@ -1,34 +1,40 @@
 <template>
   <form @submit.prevent>
-    <h4>Add ToDo</h4>
-    <input type="text" placeholder="Task" v-model="todo.task" />
+    <input type="text" placeholder="Task" v-model="title" />
     <MyBtn @click="addTodo">Add</MyBtn>
-
   </form>
 </template>
 
 <script>
-
 export default {
-
   data() {
     return {
-      todo: {
-        task: "",
-      },
+      title: "",
     };
   },
 
   methods: {
     addTodo() {
-      this.todo.id = Date.now(),
-      this.$emit('add', this.todo)
-      this.todo = {
-        task: "",
+      if (this.title.trim()) {
+        const newTodo = {
+          id: Date.now(),
+          completed: false,
+          title: this.title,
+        };
+        this.$emit("add", newTodo);
+        this.title = "";
       }
     },
   },
 };
 </script>
 
+<style scoped>
+form {
+  margin-top: 50px;
+}
 
+input {
+  width: 500px;
+}
+</style>

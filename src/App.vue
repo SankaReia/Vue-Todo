@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <TodoForm @add="addTodo"/>
-    <TodoList 
-      :todos="todos" 
-      @remove="removeTodo"
-    />
+  <div class="container">
+    <TodoForm @add="addTodo" />
+    <Loader v-if="isLoading" />
+    <TodoList v-else :todos="todos" @remove="removeTodo" />
   </div>
 </template>
 
@@ -20,19 +18,29 @@ export default {
 
   data() {
     return {
-      todos: [
-        { id: 1, task: "task1", checked: false },
-        { id: 2, task: "task2", checked: false },
-      ],
+      todos: [],
+      isLoading: false,
     };
   },
 
+  mounted() {
+    this.isLoading = true;
+    fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .then((response) => response.json())
+      .then((json) => {
+        setTimeout(() => {
+          this.todos = json;
+          this.isLoading = false;
+        }, 1000);
+      });
+  },
+
   methods: {
-    addTodo(todo) {
-      this.todos.push(todo)
+    addTodo(newTodo) {
+      this.todos.push(newTodo);
     },
-    removeTodo(todo){
-      this.todos = this.todos.filter(t => t.id !== todo.id)
+    removeTodo(todo) {
+      this.todos = this.todos.filter((t) => t.id !== todo.id);
     },
   },
 };
@@ -43,5 +51,13 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.container {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
