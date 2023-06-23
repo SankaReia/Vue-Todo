@@ -31,7 +31,7 @@ export default {
         setTimeout(() => {
           this.todos = json;
           this.isLoading = false;
-        }, 1000);
+        }, 500);
       });
   },
 
@@ -54,10 +54,12 @@ export default {
 }
 
 .container {
-  width: 1000px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 800px;
+  width: 100%;
+  padding: 0 10px;
 }
 </style>

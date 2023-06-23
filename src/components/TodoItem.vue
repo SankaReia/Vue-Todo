@@ -4,7 +4,7 @@
     <span :class="{ done: todo.completed }">
       {{ todo.title }}
     </span>
-    <MyBtn @click="$emit('remove', todo)">Delete</MyBtn>
+    <MyBtn @click="$emit('remove', todo)" style="background: red">Delete</MyBtn>
   </div>
 </template>
 
@@ -22,14 +22,15 @@ export default {
 <style scoped>
 .todo-item {
   border: 1px solid #ccc;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 2rem;
   margin-bottom: 1rem;
-  max-width: 800px;
-  width: 100%;
 }
-
+.todo-item span {
+  margin: 0 10px;
+}
 .done {
   text-decoration: line-through;
 }

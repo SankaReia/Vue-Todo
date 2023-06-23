@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent>
-    <input type="text" placeholder="Task" v-model="title" />
-    <MyBtn @click="addTodo">Add</MyBtn>
+    <input type="text" placeholder="New Task" v-model="title" />
+    <MyBtn @click="addTodo" style="background: dodgerblue">Add</MyBtn>
   </form>
 </template>
 
@@ -32,9 +32,17 @@ export default {
 <style scoped>
 form {
   margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 input {
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 2rem;
 }
 </style>
