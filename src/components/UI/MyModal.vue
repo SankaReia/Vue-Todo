@@ -35,6 +35,7 @@ export default {
     },
     editTodo() {
       this.todo.title = this.title;
+      this.$emit("update:show", false);
     },
   },
 };
