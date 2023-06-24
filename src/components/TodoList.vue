@@ -63,6 +63,11 @@ export default {
   width: 100%;
 }
 
+.list select {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
 .list h3 {
   text-align: center;
 }

@@ -4,16 +4,43 @@
     <span :class="{ done: todo.completed }">
       {{ todo.title }}
     </span>
-    <MyBtn @click="$emit('remove', todo)" style="background: red">Delete</MyBtn>
+    <div class="btns">
+      <span
+        @click="$emit('remove', todo)"
+        class="material-symbols-outlined icon"
+        style="color: red"
+      >
+        delete
+      </span>
+      <span
+        class="material-symbols-outlined icon"
+        style="color: green"
+        @click="showModal"
+      >
+        edit
+      </span>
+    </div>
+    <MyModal v-model:show="isModal" :todo="todo"></MyModal>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isModal: false,
+    };
+  },
+
   props: {
     todo: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    showModal() {
+      this.isModal = true;
     },
   },
 };
@@ -33,5 +60,14 @@ export default {
 }
 .done {
   text-decoration: line-through;
+}
+.icon {
+  cursor: pointer;
+}
+
+.btns {
+  width: 80px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
