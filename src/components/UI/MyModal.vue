@@ -34,8 +34,10 @@ export default {
       this.$emit("update:show", false);
     },
     editTodo() {
-      this.todo.title = this.title;
-      this.$emit("update:show", false);
+      if (this.title.trim() !== "") {
+        this.todo.title = this.title;
+        this.$emit("update:show", false);
+      }
     },
   },
 };
